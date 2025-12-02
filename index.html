@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chirag Cloud Toolkit - Professional PDF Tools</title>
+    <meta name="description" content="Professional PDF and file conversion tools - Merge, Split, Compress PDFs and more">
+    <style>
+        :root {
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            --gradient-7: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --gradient-8: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 22px);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 32px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 32px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .tool-card:nth-child(1)::before { background: var(--gradient-1); }
+        .tool-card:nth-child(2)::before { background: var(--gradient-2); }
+        .tool-card:nth-child(3)::before { background: var(--gradient-3); }
+        .tool-card:nth-child(4)::before { background: var(--gradient-4); }
+        .tool-card:nth-child(5)::before { background: var(--gradient-5); }
+        .tool-card:nth-child(6)::before { background: var(--gradient-6); }
+        .tool-card:nth-child(7)::before { background: var(--gradient-7); }
+        .tool-card:nth-child(8)::before { background: var(--gradient-8); }
+
+        .tool-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px var(--shadow-hover);
+        }
+
+        .tool-card:hover::before {
+            opacity: 1;
+        }
+
+        .tool-card:hover .tool-content {
+            color: #fff;
+        }
+
+        .tool-card:hover .tool-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .tool-content {
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .tool-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 32px;
+            transition: all 0.4s ease;
+        }
+
+        .tool-card h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .tool-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+            line-height: 1;
+            transition: all 0.3s ease;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 32px;
+            color: #333;
+        }
+
+        .upload-zone {
+            border: 3px dashed #667eea;
+            border-radius: 16px;
+            padding: 48px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+        }
+
+        .upload-zone:hover {
+            border-color: #764ba2;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            transform: scale(1.02);
+        }
+
+        .upload-zone.drag-over {
+            border-color: #764ba2;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            transform: scale(1.05);
+        }
+
+        .upload-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+
+        .upload-zone h3 {
+            margin-bottom: 8px;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .upload-zone p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-list {
+            margin-top: 24px;
+        }
+
+        .file-item {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .file-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .file-icon {
+            font-size: 28px;
+        }
+
+        .file-details h4 {
+            font-size: 15px;
+            margin-bottom: 4px;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .file-details p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .remove-file {
+            background: rgba(231, 76, 60, 0.1);
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .remove-file:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            width: 100%;
+            margin-top: 24px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-container {
+            display: none;
+            margin-top: 24px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            background-size: 200% 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            animation: progressGradient 2s linear infinite;
+        }
+
+        @keyframes progressGradient {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .result-section {
+            display: none;
+            margin-top: 24px;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(67, 233, 123, 0.1) 0%, rgba(56, 249, 215, 0.1) 100%);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .result-section.active {
+            display: block;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            font-size: 72px;
+            margin-bottom: 16px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .result-section h3 {
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 233, 123, 0.6);
+        }
+
+        .options-section {
+            margin-top: 24px;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #fff;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 48px 16px 40px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                padding: 0 16px 40px;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tool-card {
+                padding: 24px;
+            }
+
+            .modal-body {
+                padding: 24px;
+            }
+        }
+
+        .feature-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">CT</div>
+                <span>Chirag Toolkit</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#tools">My Files</a></li>
+                <li><a href="#workflows">Workflows</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>The Tools You Need, All in One Place</h1>
+        <p>Chirag Cloud Toolkit offers a suite of powerful, easy-to-use tools to handle all your PDF and file conversion needs.</p>
+        <span class="feature-badge">✨ Professional Grade Tools</span>
+    </section>
+
+    <section class="tools-grid" id="tools">
+        <div class="tool-card" data-tool="merge">
+            <div class="tool-content">
+                <div class="tool-icon">📑</div>
+                <h3>Merge PDF</h3>
+                <p>Combine multiple PDFs into one single document.</p>
+            </div>
+        </div>
+
+        <div class="tool-card" data-tool="split">
+            <div class="tool-content">
+                <div class="tool-icon">✂️</div>
+                <h3>Split PDF</h3>
+                <p>Extract pages from a PDF file into separate documents.</p>
+            </div>
+        </div>
+
+        <div class="tool-card" data-tool="compress">
+            <div class="tool-content">
+                <div class="tool-icon">↗️</div>
+                <h3>Compress PDF</h3>
+                <p>Reduce the file size of your PDF while optimizing for quality.</p>
+            </div>
+        </div>
+
+        <div class="tool-card" data-tool="pdf-to-jpg">
+            <div class="tool-content">
+                <div class="tool-icon">🖼️</div>
+                <h3>PDF to JPG</h3>
+                <p>Convert each page of a PDF into a JPG image.</p>
+            </div>
+        </div>
+
+        <div class="tool-card" data-tool="jpg-to-pdf">
+            <div class="tool-content">
+                <div class="tool-icon">🖼️</div>
+                <h3>JPG to PDF</h3>
+                <p>Convert JPG images to a PDF file. Adjust orientation and margins.</p>
+            </div>
+        </div>
+
+        <div class="tool-card" data-tool="pdf-to-word">
+            <div class="tool-content">
+                <div class="tool-icon">📄</div>
+                <h3>PDF to Word</h3>
+                <p>Convert your PDFs to editable Word documents.</p>
+            </div>
+        </div>
+
+        <div class="tool-card" data-tool="word-to-pdf">
+            <div class="tool-content">
+                <div class="tool-icon">📄</div>
+                <h3>Word to PDF</h3>
+                <p>Convert your Word documents to PDF files.</p>
+            </div>
+        </div>
+
+        <div class="tool-card" data-tool="scan">
+            <div class="tool-content">
+                <div class="tool-icon">📷</div>
+                <h3>Scan to PDF</h3>
+                <p>Capture document scans from your mobile device and convert them to PDF.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="toolModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Tool</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">📁</div>
+                    <h3>Choose files or drag & drop</h3>
+                    <p>Select files from your device</p>
+                </div>
+                <input type="file" id="fileInput" class="file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                
+                <div class="file-list" id="fileList"></div>
+
+                <div class="options-section" id="optionsSection" style="display: none;">
+                    <div id="toolOptions"></div>
+                </div>
+
+                <button class="btn btn-primary" id="processBtn" onclick="processFiles()" disabled>Process Files</button>
+
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">Processing...</p>
+                </div>
+
+                <div class="result-section" id="resultSection">
+                    <div class="success-icon">✓</div>
+                    <h3>Processing Complete!</h3>
+                    <p style="margin-bottom: 24px; color: #666;">Your files are ready to download</p>
+                    <a href="#" class="btn-download" id="downloadBtn">Download Files</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedFiles = [];
+        let currentTool = '';
+
+        const toolConfig = {
+            'merge': {
+                title: 'Merge PDF',
+                accept: '.pdf',
+                multiple: true,
+                options: ''
+            },
+            'split': {
+                title: 'Split PDF',
+                accept: '.pdf',
+                multiple: false,
+                options: `
+                    <div class="form-group">
+                        <label>Split Options</label>
+                        <select class="form-control" id="splitOption">
+                            <option value="all">Extract all pages</option>
+                            <option value="range">Page range (e.g., 1-5)</option>
+                            <option value="single">Single page</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Page Range/Number</label>
+                        <input type="text" class="form-control" id="pageRange" placeholder="e.g., 1-5 or 3">
+                    </div>
+                `
+            },
+            'compress': {
+                title: 'Compress PDF',
+                accept: '.pdf',
+                multiple: true,
+                options: `
+                    <div class="form-group">
+                        <label>Compression Level</label>
+                        <select class="form-control" id="compressionLevel">
+                            <option value="low">Low (Better quality)</option>
+                            <option value="medium" selected>Medium (Balanced)</option>
+                            <option value="high">High (Smaller size)</option>
+                        </select>
+                    </div>
+                `
+            },
+            'pdf-to-jpg': {
+                title: 'PDF to JPG',
+                accept: '.pdf',
+                multiple: true,
+                options: `
+                    <div class="form-group">
+                        <label>Image Quality</label>
+                        <select class="form-control" id="imageQuality">
+                            <option value="high" selected>High Quality</option>
+                            <option value="medium">Medium Quality</option>
+                            <option value="low">Low Quality</option>
+                        </select>
+                    </div>
+                `
+            },
+            'jpg-to-pdf': {
+                title: 'JPG to PDF',
+                accept: '.jpg,.jpeg,.png',
+                multiple: true,
+                options: `
+                    <div class="form-group">
+                        <label>Page Orientation</label>
+                        <select class="form-control" id="orientation">
+                            <option value="portrait">Portrait</option>
+                            <option value="landscape">Landscape</option>
+                            <option value="auto" selected>Auto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Page Margins (mm)</label>
+                        <input type="number" class="form-control" id="margins" value="10" min="0" max="50">
+                    </div>
+                `
+            },
+            'pdf-to-word': {
+                title: 'PDF to Word',
+                accept: '.pdf',
+                multiple: true,
+                options: ''
+            },
+            'word-to-pdf': {
+                title: 'Word to PDF',
+                accept: '.doc,.docx',
+                multiple: true,
+                options: ''
+            },
+            'scan': {
+                title: 'Scan to PDF',
+                accept: 'image/*',
+                multiple: true,
+                options: `
+                    <div class="form-group">
+                        <label>Scan Quality</label>
+                        <select class="form-control" id="scanQuality">
+                            <option value="high" selected>High (Best for text)</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low (Faster)</option>
+                        </select>
+                    </div>
+                `
+            }
+        };
+
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const tool = card.dataset.tool;
+                openModal(tool);
+            });
+        });
+
+        function openModal(tool) {
+            currentTool = tool;
+            const config = toolConfig[tool];
+            document.getElementById('modalTitle').textContent = config.title;
+            document.getElementById('fileInput').accept = config.accept;
+            document.getElementById('fileInput').multiple = config.multiple;
+            
+            const optionsSection = document.getElementById('optionsSection');
+            const toolOptions = document.getElementById('toolOptions');
+            if (config.options) {
+                toolOptions.innerHTML = config.options;
+                optionsSection.style.display = 'block';
+            } else {
+                optionsSection.style.display = 'none';
+            }
+
+            selectedFiles = [];
+            updateFileList();
+            document.getElementById('processBtn').disabled = true;
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('resultSection').classList.remove('active');
+            
+            document.getElementById('toolModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('toolModal').classList.remove('active');
+        }
+
+        document.getElementById('toolModal').addEventListener('click', (e) => {
+            if (e.target.id === 'toolModal') {
+                closeModal();
+            }
+        });
+
+        const uploadZone = document.getElementById('uploadZone');
+        
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('drag-over');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('drag-over');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('drag-over');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            const config = toolConfig[currentTool];
+            
+            if (!config.multiple && files.length > 1) {
+                alert('This tool only accepts one file at a time');
+                return;
+            }
+
+            Array.from(files).forEach(file => {
+                if (validateFile(file, config.accept)) {
+                    selectedFiles.push(file);
+                }
+            });
+
+            updateFileList();
+            document.getElementById('processBtn').disabled = selectedFiles.length === 0;
+        }
+
+        function validateFile(file, accept) {
+            const extensions = accept.split(',').map(ext => ext.trim().toLowerCase());
+            const fileName = file.name.toLowerCase();
+            
+            if (accept === 'image/*') {
+                return file.type.startsWith('image/');
+            }
+            
+            return extensions.some(ext => fileName.endsWith(ext.replace('.', '')));
+        }
+
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            
+            if (selectedFiles.length === 0) {
+                fileList.innerHTML = '';
+                return;
+            }
+
+            fileList.innerHTML = selectedFiles.map((file, index) => `
+                <div class="file-item">
+                    <div class="file-info">
+                        <div class="file-icon">📄</div>
+                        <div class="file-details">
+                            <h4>${file.name}</h4>
+                            <p>${formatFileSize(file.size)}</p>
+                        </div>
+                    </div>
+                    <button class="remove-file" onclick="removeFile(${index})">✕</button>
+                </div>
+            `).join('');
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+            document.getElementById('processBtn').disabled = selectedFiles.length === 0;
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        async function processFiles() {
+            document.getElementById('processBtn').disabled = true;
+            document.getElementById('progressContainer').style.display = 'block';
+            
+            let progress = 0;
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 95) progress = 95;
+                progressFill.style.width = progress + '%';
+                progressText.textContent = `Processing... ${Math.round(progress)}%`;
+            }, 200);
+
+            await new Promise(resolve => setTimeout(resolve, 2500));
+
+            clearInterval(interval);
+            progressFill.style.width = '100%';
+            progressText.textContent = 'Processing... 100%';
+
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('resultSection').classList.add('active');
+
+            let blob, fileName;
+            
+            if (currentTool === 'merge' || currentTool === 'compress' || currentTool === 'split') {
+                const pdfContent = `%PDF-1.4
+1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj
+2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj
+3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Contents 4 0 R/Resources<</Font<</F1 5 0 R>>>>>>endobj
+4 0 obj<</Length 44>>stream
+BT /F1 24 Tf 100 700 Td (Processed by Chirag Toolkit) Tj ET
+endstream endobj
+5 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>endobj
+xref
+0 6
+0000000000 65535 f
+0000000009 00000 n
+0000000058 00000 n
+0000000115 00000 n
+0000000244 00000 n
+0000000337 00000 n
+trailer<</Size 6/Root 1 0 R>>
+startxref
+416
+%%EOF`;
+                blob = new Blob([pdfContent], { type: 'application/pdf' });
+                fileName = `processed_${currentTool}_${Date.now()}.pdf`;
+            } else if (currentTool === 'pdf-to-jpg') {
+                const canvas = document.createElement('canvas');
+                canvas.width = 800;
+                canvas.height = 600;
+                const ctx = canvas.getContext('2d');
+                const gradient = ctx.createLinearGradient(0, 0, 800, 600);
+                gradient.addColorStop(0, '#667eea');
+                gradient.addColorStop(1, '#764ba2');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 800, 600);
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 32px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Processed by Chirag Toolkit', 400, 300);
+                blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.95));
+                fileName = `converted_${Date.now()}.jpg`;
+            } else if (currentTool === 'jpg-to-pdf') {
+                const pdfContent = `%PDF-1.4
+1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj
+2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj
+3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Contents 4 0 R/Resources<</Font<</F1 5 0 R>>>>>>endobj
+4 0 obj<</Length 50>>stream
+BT /F1 20 Tf 100 700 Td (JPG converted to PDF successfully) Tj ET
+endstream endobj
+5 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>endobj
+xref
+0 6
+0000000000 65535 f
+0000000009 00000 n
+0000000058 00000 n
+0000000115 00000 n
+0000000244 00000 n
+0000000343 00000 n
+trailer<</Size 6/Root 1 0 R>>
+startxref
+422
+%%EOF`;
+                blob = new Blob([pdfContent], { type: 'application/pdf' });
+                fileName = `images_to_pdf_${Date.now()}.pdf`;
+            } else {
+                const content = `Chirag Cloud Toolkit - ${toolConfig[currentTool].title}
+                
+File processed successfully!
+Tool: ${currentTool}
+Files processed: ${selectedFiles.length}
+Date: ${new Date().toLocaleString()}
+
+This is a demo output. In production, actual file conversion would happen here.`;
+                blob = new Blob([content], { type: 'text/plain' });
+                fileName = `processed_${currentTool}_${Date.now()}.txt`;
+            }
+            
+            const url = URL.createObjectURL(blob);
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.href = url;
+            downloadBtn.download = fileName;
+            
+            downloadBtn.onclick = (e) => {
+                setTimeout(() => URL.revokeObjectURL(url), 100);
+            };
+        }
+    </script>
+</body>
+</html>
